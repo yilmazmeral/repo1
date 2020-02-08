@@ -1,0 +1,66 @@
+select * from countries limit 3;
+select * from population_years limit 3;
+
+-- 3
+select count(*) as 'cnt_africa' 
+from countries
+where continent = 'Africa';
+
+-- 4
+select round(sum(population_years.population),1) as 'sum_pop_oce'
+from countries
+inner join population_years
+on countries.id = population_years.country_id
+where population_years.year = 2005 and countries.continent = 'Oceania';
+
+-- 5
+select round(avg(population_years.population),1) as 'avg_pop_samerica'
+from countries
+inner join population_years
+on countries.id = population_years.country_id
+where population_years.year = 2003 and countries.continent = 'South America';
+
+-- 6
+select * from countries
+inner join population_years
+on countries.id = population_years.country_id
+where population_years.year = 2007 and population is not null
+order by population_years.population asc
+limit 1;
+
+-- 7
+select round(avg(population_years.population),1) as 'avg_pop_poland'
+from countries
+inner join population_years
+on countries.id = population_years.country_id
+where countries.name = 'Poland';
+
+-- 8
+select * from countries
+where name like '%The%';
+
+-- 9
+select continent, year, sum(population) as 'sum_pop' 
+from countries
+inner join population_years
+on countries.id = population_years.country_id
+where year = 2010
+group by continent
+order by continent asc;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
